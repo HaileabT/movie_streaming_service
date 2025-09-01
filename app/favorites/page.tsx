@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
 import { useToast } from "@/components/ToastProvider";
 import { MovieDetail } from "../movie/[id]/page";
-import { fetchWatchLater } from "../watch-later/page";
+import { fetchFavorites, fetchWatchLater } from "@/lib/pageFetches";
 
 export interface FavoriteMovie {
   id: string;
@@ -21,37 +21,6 @@ export interface FavoriteMovie {
     release_date: string;
   };
 }
-
-export const fetchFavorites = async (
-  stateSetter: Function,
-  loadingSetter: Function,
-  errorSetter: Function,
-  toastShow: Function
-) => {
-  try {
-    const response = await axios.get("/api/user/favorites");
-    const favoritesPromises: Promise<AxiosResponse<MovieDetail>>[] = [] as Promise<AxiosResponse<MovieDetail>>[];
-
-    response.data.forEach((favorite: FavoriteMovie) => {
-      favoritesPromises.push(axios.get(`/api/movies/${favorite.movieId}`));
-    });
-
-    const responses = await Promise.all(favoritesPromises);
-
-    stateSetter(responses.map((res) => res.data));
-  } catch (error: any) {
-    if (error.response?.status === 401) {
-      errorSetter("Please sign in to view your favorites");
-      toastShow("Please sign in to view your favorites", { variant: "error" });
-    } else {
-      const msg = error?.response?.data?.error || "Failed to load favorites";
-      errorSetter(msg);
-      toastShow(msg, { variant: "error" });
-    }
-  } finally {
-    loadingSetter(false);
-  }
-};
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<MovieDetail[]>([]);

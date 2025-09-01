@@ -6,10 +6,11 @@ import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
 import "@/app/index.css";
 import { useToast } from "@/components/ToastProvider";
-import { fetchWatchLater, WatchLaterMovie } from "./watch-later/page";
-import { FavoriteMovie, fetchFavorites } from "./favorites/page";
+import { WatchLaterMovie } from "./watch-later/page";
+import { FavoriteMovie } from "./favorites/page";
 import { User } from "@prisma/client";
 import { MovieDetail } from "./movie/[id]/page";
+import { fetchFavorites, fetchWatchLater } from "@/lib/pageFetches";
 
 interface Movie {
   id: number;

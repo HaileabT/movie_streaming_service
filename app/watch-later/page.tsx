@@ -5,8 +5,9 @@ import axios, { type AxiosResponse } from "axios";
 import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
 import { useToast } from "@/components/ToastProvider";
-import { FavoriteMovie, fetchFavorites } from "../favorites/page";
+import { FavoriteMovie } from "../favorites/page";
 import { MovieDetail } from "../movie/[id]/page";
+import { fetchFavorites, fetchWatchLater } from "@/lib/pageFetches";
 
 export interface WatchLaterMovie {
   id: string;
@@ -21,37 +22,6 @@ export interface WatchLaterMovie {
     release_date: string;
   };
 }
-
-export const fetchWatchLater = async (
-  stateSetter: Function,
-  loadingSetter: Function,
-  errorSetter: Function,
-  toastShow: Function
-) => {
-  try {
-    const response = await axios.get("/api/user/watch-later");
-    const watchLaterPromises: Promise<AxiosResponse<MovieDetail>>[] = [] as Promise<AxiosResponse<MovieDetail>>[];
-
-    response.data.forEach((movie: WatchLaterMovie) => {
-      watchLaterPromises.push(axios.get(`/api/movies/${movie.movieId}`));
-    });
-
-    const responses = await Promise.all(watchLaterPromises);
-
-    stateSetter(responses.map((res) => res.data));
-  } catch (error: any) {
-    if (error.response?.status === 401) {
-      errorSetter("Please sign in to view your watch later list");
-      toastShow("Please sign in to view your watch later list", { variant: "error" });
-    } else {
-      const msg = error?.response?.data?.error || "Failed to load watch later list";
-      errorSetter(msg);
-      toastShow(msg, { variant: "error" });
-    }
-  } finally {
-    loadingSetter(false);
-  }
-};
 
 export default function WatchLaterPage() {
   const [watchLater, setWatchLater] = useState<MovieDetail[]>([]);
