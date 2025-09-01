@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  passwordHash String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  favorites    Favorite[]
+  watchLater   WatchLater[]
+  ratings      Rating[]
+
+  @@map("users")
+}
+
+model MovieMeta {
+  id           Int          @id
+  title        String
+  description  String?
+  genreIds     Int[]
+  releaseDate  DateTime?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  vote_average Float
+  favorites    Favorite[]
+  watchLater   WatchLater[]
+  ratings      Rating[]
+
+  @@map("movie_meta")
+}
+
+model Favorite {
+  id        String    @id @default(cuid())
+  userId    String
+  movieId   Int
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie     MovieMeta @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
+  @@map("favorites")
+}
+
+model WatchLater {
+  id        String    @id @default(cuid())
+  userId    String
+  movieId   Int
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie     MovieMeta @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
+  @@map("watch_later")
+}
+
+model Rating {
+  id        String    @id @default(cuid())
+  userId    String
+  movieId   Int
+  score     Int       @db.SmallInt
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie     MovieMeta @relation(fields: [movieId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
+  @@map("ratings")
+}
