@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
           title: tmdbMovie.title,
           description: tmdbMovie.overview,
           genreIds: tmdbMovie.genre_ids,
+          vote_average: tmdbMovie.vote_average,
           releaseDate: tmdbMovie.release_date ? new Date(tmdbMovie.release_date) : null,
         },
       });
@@ -117,5 +118,3 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
-
-
