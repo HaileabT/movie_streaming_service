@@ -4,12 +4,12 @@ A movie streaming platform built with Next.js, tailwindcss v4, TypeScript, and P
 
 ## Participants
 
-| Name            | Role     | Contribution                                |
-| --------------- | -------- | ------------------------------------------- |
-| Yohannis Abebe  | Frontend | Utility Components, auth pages, and styling |
-| Aphomia Wodajo  | Frontend | Movie details page, footer, and styling     |
-| Yibraleh Ayele  | Frontend | Favorites page and watch later page         |
-| Haileab Tesfaye | Backend  | The backend as a whole                      |
+| Name            | Role     | Contribution                                                  |
+| --------------- | -------- | ------------------------------------------------------------- |
+| Yohannis Abebe  | Frontend | Utility Components, auth pages, and styling                   |
+| Aphomia Wodajo  | Frontend | Movie details page, footer, and styling                       |
+| Yibraleh Ayele  | Frontend | Favorites page and watch later page                           |
+| Haileab Tesfaye | Backend  | The backend as a whole and integrated vercel's speed-insights |
 
 ## Features
 
