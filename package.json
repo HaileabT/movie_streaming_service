@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "dotenv -e .env next dev",
+    "generate:secret": "node scripts/gen-jwt-secret.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
