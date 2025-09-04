@@ -43,13 +43,13 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-gray-950 text-white shadow-lg">
+    <header className="bg-gradient-to-r from-gray-900 via-gray-800 to-red-900 text-white shadow-md">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent hover:from-blue-500 hover:to-green-500 transition-colors duration-300"
+            className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-red-500 to-red-300 bg-clip-text text-transparent hover:from-red-400 hover:to-red-200 transition-colors duration-300"
           >
             MovieStream
           </Link>
@@ -58,7 +58,7 @@ export default function Header() {
           <nav className="hidden lg:flex items-center space-x-8 font-medium">
             <Link
               href="/"
-              className="hover:text-blue-400 transition-colors text-sm sm:text-base"
+              className="hover:text-red-400 transition-colors text-sm sm:text-base"
             >
               Home
             </Link>
@@ -66,13 +66,13 @@ export default function Header() {
               <>
                 <Link
                   href="/favorites"
-                  className="hover:text-blue-400 transition-colors text-sm sm:text-base"
+                  className="hover:text-red-400 transition-colors text-sm sm:text-base"
                 >
                   Favorites
                 </Link>
                 <Link
                   href="/watch-later"
-                  className="hover:text-blue-400 transition-colors text-sm sm:text-base"
+                  className="hover:text-red-400 transition-colors text-sm sm:text-base"
                 >
                   Watch Later
                 </Link>
@@ -84,7 +84,6 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-4">
-                {/* Email only visible on md and up */}
                 <span className="hidden md:block text-sm text-gray-300 truncate max-w-[150px]">
                   {user.email}
                 </span>
@@ -99,13 +98,13 @@ export default function Header() {
               <div className="hidden sm:flex items-center space-x-3">
                 <Link
                   href="/signin"
-                  className="bg-blue-600 hover:bg-blue-700 px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors shadow-md"
+                  className="bg-red-600 hover:bg-red-700 px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors shadow-md"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/signup"
-                  className="bg-green-600 hover:bg-green-700 px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors shadow-md"
+                  className="bg-gray-800 hover:bg-gray-700 px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-colors shadow-md border border-gray-700"
                 >
                   Sign Up
                 </Link>
@@ -153,7 +152,7 @@ export default function Header() {
           <nav className="flex flex-col space-y-4 border-t border-gray-800 pt-4">
             <Link
               href="/"
-              className="hover:text-blue-400 transition-colors text-base px-2"
+              className="hover:text-red-400 transition-colors text-base px-2"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
@@ -162,14 +161,14 @@ export default function Header() {
               <>
                 <Link
                   href="/favorites"
-                  className="hover:text-blue-400 transition-colors text-base px-2"
+                  className="hover:text-red-400 transition-colors text-base px-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Favorites
                 </Link>
                 <Link
                   href="/watch-later"
-                  className="hover:text-blue-400 transition-colors text-base px-2"
+                  className="hover:text-red-400 transition-colors text-base px-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Watch Later
@@ -182,14 +181,14 @@ export default function Header() {
               <div className="flex flex-col space-y-2 pt-2">
                 <Link
                   href="/signin"
-                  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-sm text-center font-medium transition-colors shadow-md"
+                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md text-sm text-center font-medium transition-colors shadow-md"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/signup"
-                  className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md text-sm text-center font-medium transition-colors shadow-md"
+                  className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-md text-sm text-center font-medium transition-colors shadow-md border border-gray-700"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Sign Up
