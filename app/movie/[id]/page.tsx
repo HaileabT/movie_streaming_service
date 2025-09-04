@@ -108,11 +108,11 @@ export default function MovieDetailPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-50 dark:bg-gradient-to-bl from-red-950 to-black">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
             <p className="mt-4 text-gray-600 dark:text-gray-400">Loading movie details...</p>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function MovieDetailPage() {
 
   if (error || !movie) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-50 bg-gradient-to-bl from-red-950 to-black">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
@@ -153,55 +153,61 @@ export default function MovieDetailPage() {
           </div>
 
           <div className="relative z-10 container mx-auto px-4 py-8 h-full flex items:end">
-            <div className="flex flex-col md:flex-row items-start md:items-end space-y-4 md:space-y-0 md:space-x-6">
-              <img src={posterUrl} alt={movie.title} className="w-48 h-72 object-cover rounded-lg shadow-lg" />
- 
-             <div className="relative z-10 w-full max-w-3xl mx-auto px-4 py-4 h-50 flex items-end bg-[#0a0d1a]/80 rounded-xl shadow-lg border border-red-700">
-             <div className="w-full text-white text-sm md:text-base lg:text-lg">
-              <div className="text-red-700 max-w-3xl mx-auto">
-                <h1 className="text-5xl md:text-4xl font-bold mb-2">{movie.title}</h1>
-                <div className="flex items-center space-x-4 mb-4">
-                  <span className="text-yellow-400">⭐ {movie.vote_average.toFixed(1)}</span>
-                  <span>{movie.release_date ? new Date(movie.release_date).getFullYear() : "N/A"}</span>
-                  <span>{movie.runtime} min</span>
-                </div>
-                <div className="flex flex-wrap text-black gap-2 mb-4">
-                  {movie.genres.map((genre) => (
-                    <span key={genre.id} className="px-3 py-1 bg-blue-100 bg-opacity-20 rounded-full text-sm">
-                      {genre.name}
-                    </span>
-                  ))}
-                </div>
+            <div className="flex flex-row items-end md:flex-row gap-2 md:items-end space-y-4 md:space-y-0 md:space-x-6">
+              <img
+                src={posterUrl}
+                alt={movie.title}
+                className="hidden md:block w-48 h-72 object-cover rounded-lg shadow-lg"
+              />
 
-                {/* Action Buttons */}
-                <div className="flex flex-wrap gap-3">
-                  <button
-                    onClick={handleFavorite}
-                    className={`px-5 py-1 rounded-lg transition-colors ${
-                      isFavorite
-                        ? "bg-red-700 text-white hover:bg-red-800"
-                        : "bg-blue-100 bg-opacity-20 text-black hover:bg-opacity-30"
-                    }`}
-                  >
-                    {isFavorite ? "❤️ Favorited" : "🤍 Favorite"}
-                  </button>
+              <div className="relative z-10 w-full max-w-3xl mx-auto px-4 py-4 h-50 flex items-end bg-[#ffffff22] backdrop-blur-md rounded-xl shadow-lg border border-red-700">
+                <div className="w-full text-white text-sm md:text-base lg:text-lg">
+                  <div className="text-red-700 max-w-3xl mx-auto">
+                    <h1 className="text-5xl md:text-4xl font-bold mb-2">{movie.title}</h1>
+                    <div className="flex items-center space-x-4 mb-4">
+                      <span className="text-yellow-400 bg-red-700 px-3 py-1 rounded-sm">
+                        ⭐ {movie.vote_average.toFixed(1)}
+                      </span>
+                      <span>{movie.release_date ? new Date(movie.release_date).getFullYear() : "N/A"}</span>
+                      <span>{movie.runtime} min</span>
+                    </div>
+                    <div className="flex flex-wrap text-black gap-2 mb-4">
+                      {movie.genres.map((genre) => (
+                        <span key={genre.id} className="px-3 py-1 bg-blue-100 bg-opacity-20 rounded-full text-sm">
+                          {genre.name}
+                        </span>
+                      ))}
+                    </div>
 
-                  <button
-                    onClick={handleWatchLater}
-                    className={`px-5 py-1 rounded-lg transition-colors ${
-                      isWatchLater
-                        ? "bg-blue-700 text-white hover:bg-blue-800"
-                        : "bg-blue-100 bg-opacity-20 text-black hover:bg-opacity-30"
-                    }`}
-                  >
-                    {isWatchLater ? "📺 Watch Later" : "⏰ Watch Later"}
-                  </button>
+                    {/* Action Buttons */}
+                    <div className="flex flex-wrap gap-3">
+                      <button
+                        onClick={handleFavorite}
+                        className={`px-5 py-1 rounded-lg transition-colors ${
+                          isFavorite
+                            ? "bg-red-700 text-white hover:bg-red-800"
+                            : "bg-blue-100 bg-opacity-20 text-black hover:bg-opacity-30"
+                        }`}
+                      >
+                        {isFavorite ? "❤️ Favorited" : "🤍 Favorite"}
+                      </button>
+
+                      <button
+                        onClick={handleWatchLater}
+                        className={`px-5 py-1 rounded-lg transition-colors ${
+                          isWatchLater
+                            ? "bg-blue-700 text-white hover:bg-blue-800"
+                            : "bg-blue-100 bg-opacity-20 text-black hover:bg-opacity-30"
+                        }`}
+                      >
+                        {isWatchLater ? "📺 Watch Later" : "⏰ Watch Later"}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        </div>  
         </div>
 
         {/* Content Section */}

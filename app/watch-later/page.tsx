@@ -40,11 +40,11 @@ export default function WatchLaterPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-50 bg-gradient-to-bl from-red-950 to-black">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
             <p className="mt-4 text-gray-600 dark:text-gray-400">Loading watch later list...</p>
           </div>
         </div>
@@ -54,16 +54,13 @@ export default function WatchLaterPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-50  bg-gradient-to-bl from-red-950 to-black">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <p className="text-red-600 dark:text-red-400">{error}</p>
             {error.includes("sign in") && (
-              <a
-                href="/signin"
-                className="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-              >
+              <a href="/signin" className="mt-4 inline-block px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700">
                 Sign In
               </a>
             )}
@@ -74,7 +71,7 @@ export default function WatchLaterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 bg-gradient-to-bl from-red-950 to-black">
       <Header />
 
       <main className="container mx-auto px-4 py-8">
@@ -92,7 +89,7 @@ export default function WatchLaterPage() {
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               Add movies to your watch later list to see them here
             </p>
-            <a href="/" className="inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            <a href="/" className="inline-block px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700">
               Browse Movies
             </a>
           </div>
