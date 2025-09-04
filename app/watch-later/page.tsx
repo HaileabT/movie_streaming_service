@@ -5,23 +5,8 @@ import axios, { type AxiosResponse } from "axios";
 import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
 import { useToast } from "@/components/ToastProvider";
-import { FavoriteMovie } from "../favorites/page";
-import { MovieDetail } from "../movie/[id]/page";
+import { MovieDetail } from "../movie/[id]/types";
 import { fetchFavorites, fetchWatchLater } from "@/lib/pageFetches";
-
-export interface WatchLaterMovie {
-  id: string;
-  movieId: number;
-  createdAt: string;
-  movie: {
-    id: number;
-    title: string;
-    overview: string;
-    poster_path: string;
-    vote_average: number;
-    release_date: string;
-  };
-}
 
 export default function WatchLaterPage() {
   const [watchLater, setWatchLater] = useState<MovieDetail[]>([]);
