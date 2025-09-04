@@ -1,6 +1,6 @@
-import { FavoriteMovie } from "@/app/favorites/page";
-import { MovieDetail } from "@/app/movie/[id]/page";
-import { WatchLaterMovie } from "@/app/watch-later/page";
+import { FavoriteMovie } from "@/app/favorites/types";
+import { MovieDetail } from "@/app/movie/[id]/types";
+import { WatchLaterMovie } from "@/app/watch-later/types";
 import axios, { AxiosResponse } from "axios";
 
 export const fetchWatchLater = async (

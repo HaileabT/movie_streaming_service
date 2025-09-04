@@ -1,28 +1,41 @@
 # Movie Streaming Platform
 
-A basic movie streaming platform built with Next.js, TypeScript, and PostgreSQL. This project demonstrates a full-stack application with authentication, movie browsing, and user interactions.
+A movie streaming platform built with Next.js, tailwindcss v4, TypeScript, and PostgreSQL. This project demonstrates a full-stack application with authentication, movie browsing, and user interactions.
+
+## Participants
+
+| Name            | Role     | Contribution                                |
+| --------------- | -------- | ------------------------------------------- |
+| Yohannis Abebe  | Frontend | Utility Components, auth pages, and styling |
+| Aphomia Wodajo  | Frontend | Movie details page, footer, and styling     |
+| Yibraleh Ayele  | Frontend | Favorites page and watch later page         |
+| Haileab Tesfaye | Backend  | The backend as a whole                      |
 
 ## Features
 
 ### Authentication
+
 - ✅ Sign up and sign in with JWT-based authentication
 - ✅ Sign out functionality
 - ✅ Change password for authenticated users
 - ✅ HTTP-only cookie-based session management
 
 ### Public Features (No Auth Required)
+
 - ✅ Movie listing with pagination
 - ✅ Search movies by keyword
 - ✅ Filter movies by genre
 - ✅ Movie details page with trailer playback
 
 ### Authenticated Features
+
 - ✅ Add/remove movies to favorites
 - ✅ Add/remove movies to watch later list
 - ✅ Rate movies (1-5 stars)
 - ✅ View personal favorites and watch later lists
 
 ### Technical Features
+
 - ✅ Next.js 14 with App Router
 - ✅ TypeScript for type safety
 - ✅ PostgreSQL database with Prisma ORM
@@ -46,7 +59,7 @@ A basic movie streaming platform built with Next.js, TypeScript, and PostgreSQL.
 
 ## Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - PostgreSQL database
 - TMDB API key
 
@@ -93,7 +106,13 @@ npm run db:push
 4. Request an API key
 5. Add the API key to your `.env.local` file
 
-### 6. Run the development server
+### 6. Generate JWT Secrect
+
+```bash
+npm generate:secret
+```
+
+### 7. Run the development server
 
 ```bash
 npm run dev
@@ -119,13 +138,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 │   ├── layout.tsx         # Root layout
 │   └── page.tsx           # Home page
 ├── components/            # React components
-│   ├── Header.tsx         # Navigation header
-│   ├── MovieCard.tsx      # Movie card component
-│   └── VideoPlayer.tsx    # Video player component
 ├── lib/                   # Utility libraries
-│   ├── auth.ts           # Authentication utilities
-│   ├── prisma.ts         # Prisma client
-│   └── tmdb.ts           # TMDB API utilities
 ├── prisma/               # Database schema
 │   └── schema.prisma     # Prisma schema
 └── public/               # Static assets
@@ -134,17 +147,20 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/signup` - User registration
 - `POST /api/auth/signin` - User login
 - `POST /api/auth/signout` - User logout
 - `PUT /api/auth/change-password` - Change password
 
 ### Movies
+
 - `GET /api/movies` - Get movies (with pagination, search, genre filter)
 - `GET /api/movies/[id]` - Get movie details
 - `GET /api/genres` - Get all genres
 
 ### User Features (Authenticated)
+
 - `GET /api/user/favorites` - Get user favorites
 - `POST /api/user/favorites` - Add to favorites
 - `DELETE /api/user/favorites` - Remove from favorites
@@ -168,23 +184,27 @@ The application uses the following database models:
 ## Features in Detail
 
 ### Movie Browsing
+
 - Browse popular movies with pagination
 - Search movies by title
 - Filter by genre using sidebar
 - View movie details with trailers
 
 ### User Interactions
+
 - Add/remove movies to favorites
 - Add/remove movies to watch later
 - Rate movies with 1-5 stars
 - View personal lists
 
 ### Video Playback
+
 - YouTube trailer integration using Video.js
 - Responsive video player
 - Custom video player styling
 
 ### Authentication
+
 - Secure JWT-based authentication
 - HTTP-only cookies for session management
 - Password hashing with bcryptjs
@@ -228,14 +248,6 @@ For production, use Prisma migrations instead of `db:push`:
 ```bash
 npx prisma migrate dev --name init
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
 
 ## License
 
