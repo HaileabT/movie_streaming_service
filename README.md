@@ -2,7 +2,7 @@
 
 A movie streaming platform built with Next.js, tailwindcss v4, TypeScript, and PostgreSQL. This project demonstrates a full-stack application with authentication, movie browsing, and user interactions.
 
-## Participants
+## Contributors
 
 | Name            | Role     | Contribution                                                  |
 | --------------- | -------- | ------------------------------------------------------------- |
