@@ -6,10 +6,23 @@ import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
 import "@/app/index.css";
 import { useToast } from "@/components/ToastProvider";
-import { WatchLaterMovie } from "./watch-later/page";
-import { FavoriteMovie } from "./favorites/page";
-import { User } from "@prisma/client";
-import { MovieDetail } from "./movie/[id]/page";
+// Define User type locally (customize fields as needed)
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  // Add any additional fields as needed
+}
+// Define MovieDetail type here or import from a shared types file
+interface MovieDetail {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  vote_average: number;
+  release_date: string;
+  // Add any additional fields as needed
+}
 import { fetchFavorites, fetchWatchLater } from "@/lib/pageFetches";
 
 interface Movie {
