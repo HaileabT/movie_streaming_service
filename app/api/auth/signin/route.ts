@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
-    // Find user by email
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -19,19 +18,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    // Verify password
     const isValidPassword = await comparePassword(password, user.passwordHash);
     if (!isValidPassword) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
-    // Generate JWT token
     const token = generateToken({
       userId: user.id,
       email: user.email,
     });
 
-    // Set auth cookie
     await setAuthCookie(token);
 
     return NextResponse.json(

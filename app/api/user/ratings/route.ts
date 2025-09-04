@@ -41,13 +41,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Score must be between 1 and 5" }, { status: 400 });
     }
 
-    // Check if movie exists in MovieMeta, if not create it
     let movieMeta = await prisma.movieMeta.findUnique({
       where: { id: movieId },
     });
 
     if (!movieMeta) {
-      // Fetch movie details from TMDB and create MovieMeta
       const { getMovieDetail } = await import("@/lib/tmdb");
       const tmdbMovie = await getMovieDetail(movieId);
 
@@ -63,7 +61,6 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Upsert rating (create or update)
     const rating = await prisma.rating.upsert({
       where: {
         userId_movieId: {

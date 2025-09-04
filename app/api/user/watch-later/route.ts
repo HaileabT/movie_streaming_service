@@ -38,13 +38,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Movie ID is required" }, { status: 400 });
     }
 
-    // Check if movie exists in MovieMeta, if not create it
     let movieMeta = await prisma.movieMeta.findUnique({
       where: { id: movieId },
     });
 
     if (!movieMeta) {
-      // Fetch movie details from TMDB and create MovieMeta
       const { getMovieDetail } = await import("@/lib/tmdb");
       const tmdbMovie = await getMovieDetail(movieId);
 

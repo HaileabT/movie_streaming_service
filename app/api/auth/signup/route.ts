@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Password must be at least 6 characters long" }, { status: 400 });
     }
 
-    // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -23,7 +22,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "User already exists" }, { status: 409 });
     }
 
-    // Hash password and create user
     const passwordHash = await hashPassword(password);
     const user = await prisma.user.create({
       data: {
@@ -32,13 +30,11 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Generate JWT token
     const token = generateToken({
       userId: user.id,
       email: user.email,
     });
 
-    // Set auth cookie
     await setAuthCookie(token);
 
     return NextResponse.json(
