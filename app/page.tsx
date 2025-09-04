@@ -6,14 +6,14 @@ import Header from "@/components/Header";
 import MovieCard from "@/components/MovieCard";
 import "@/app/index.css";
 import { useToast } from "@/components/ToastProvider";
-// Define User type locally (customize fields as needed)
+import { fetchFavorites, fetchWatchLater } from "@/lib/pageFetches";
+
 interface User {
   id: string;
   name: string;
   email: string;
-  // Add any additional fields as needed
 }
-// Define MovieDetail type here or import from a shared types file
+
 interface MovieDetail {
   id: number;
   title: string;
@@ -21,9 +21,7 @@ interface MovieDetail {
   poster_path: string;
   vote_average: number;
   release_date: string;
-  // Add any additional fields as needed
 }
-import { fetchFavorites, fetchWatchLater } from "@/lib/pageFetches";
 
 interface Movie {
   id: number;
@@ -61,19 +59,12 @@ export default function HomePage() {
   const { show } = useToast();
 
   useEffect(() => {
-    // Check if user is logged in by making a request to a protected endpoint
     const checkAuth = async () => {
       try {
         const response = await axios.get("/api/auth/get-user");
-        if (response.status === 200) {
-          // User is authenticated, we can get user info from the response
-          // For now, we'll just set a basic user object
-          setUser(response.data);
-        }
-      } catch (error) {
-        // User is not authenticated
+        if (response.status === 200) setUser(response.data);
+      } catch {
         setUser(null);
-        throw error;
       }
     };
 
@@ -96,7 +87,6 @@ export default function HomePage() {
       const response = await axios.get("/api/genres");
       setGenres(response.data.genres);
     } catch (error: any) {
-      console.error("Error fetching genres:", error);
       const msg = error?.response?.data?.error || "Failed to load genres";
       show(msg, { variant: "error" });
     }
@@ -107,21 +97,15 @@ export default function HomePage() {
     setError("");
 
     try {
-      const params = new URLSearchParams({
-        page: currentPage.toString(),
-      });
+      const params = new URLSearchParams({ page: currentPage.toString() });
 
-      if (searchQuery) {
-        params.append("query", searchQuery);
-      } else if (selectedGenre) {
-        params.append("genreId", selectedGenre.toString());
-      }
+      if (searchQuery) params.append("query", searchQuery);
+      else if (selectedGenre) params.append("genreId", selectedGenre.toString());
 
       const response = await axios.get<MovieResponse>(`/api/movies?${params}`);
       setMovies(response.data.results);
       setTotalPages(response.data.total_pages);
     } catch (error: any) {
-      console.error("Error fetching movies:", error);
       const msg = error?.response?.data?.error || "Failed to load movies";
       setError(msg);
       show(msg, { variant: "error" });
@@ -151,7 +135,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-50 bg-gradient-to-bl from-red-950 to-black">
       <Header />
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-10">
         {/* Search Bar */}
         <div className="mb-8">
           <form onSubmit={handleSearch} className="max-w-md mx-auto">
@@ -173,7 +157,7 @@ export default function HomePage() {
           </form>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-10">
           {/* Sidebar - Genres */}
           <aside className="lg:w-64">
             <div className="bg-white dark:bg-[rgba(0,0,0,0.1)] border-2 border-red-700 rounded-lg shadow-md p-6">
@@ -232,14 +216,14 @@ export default function HomePage() {
                 <p className="mt-4 text-gray-600 dark:text-gray-400">Loading movies...</p>
               </div>
             ) : error ? (
-              <div className="text-center py-12">
+              <div className="text-center py-16">
                 <p className="text-red-600 dark:text-red-400">{error}</p>
                 <button onClick={fetchMovies} className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
                   Try Again
                 </button>
               </div>
             ) : movies.length === 0 ? (
-              <div className="text-center py-12">
+              <div className="text-center py-16">
                 <p className="text-gray-600 dark:text-gray-400">No movies found.</p>
               </div>
             ) : (
@@ -257,7 +241,7 @@ export default function HomePage() {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="flex justify-center items-center space-x-2 mt-8">
+                  <div className="flex justify-center items-center gap-4 mt-10">
                     <button
                       onClick={() => handlePageChange(currentPage - 1)}
                       disabled={currentPage === 1}
@@ -265,11 +249,9 @@ export default function HomePage() {
                     >
                       Previous
                     </button>
-
-                    <span className="px-4 py-2 text-gray-700 dark:text-gray-300">
+                    <span className="text-gray-600 dark:text-gray-400">
                       Page {currentPage} of {totalPages}
                     </span>
-
                     <button
                       onClick={() => handlePageChange(currentPage + 1)}
                       disabled={currentPage === totalPages}
