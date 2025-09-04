@@ -1,6 +1,7 @@
 const TMDB_API_KEY = process.env.TMDB_API_KEY || "";
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
+
 export interface TMDBMovie {
   id: number;
   title: string;
@@ -50,9 +51,13 @@ async function tmdbRequest<T>(endpoint: string, params: Record<string, string> =
   const response = await fetch(url.toString());
 
   if (!response.ok) {
+    console.log(process.env.TMDB_API_KEY)
+
+    console.error(response)
+
     throw new Error(`TMDB API error: ${response.status}`);
   }
-
+  console.error(response)
   return response.json();
 }
 
@@ -91,3 +96,4 @@ export function getPosterUrl(path: string, size: string = "w500"): string {
 export function getBackdropUrl(path: string, size: string = "w1280"): string {
   return `https://image.tmdb.org/t/p/${size}${path}`;
 }
+

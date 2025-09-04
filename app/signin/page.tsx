@@ -6,12 +6,14 @@ import Link from "next/link";
 import axios from "axios";
 import Header from "@/components/Header";
 import { useToast } from "@/components/ToastProvider";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { show } = useToast();
 
@@ -30,7 +32,8 @@ export default function SignInPage() {
         router.push("/");
       }
     } catch (error: any) {
-      const msg = error.response?.data?.error || "An error occurred during signin";
+      const msg =
+        error.response?.data?.error || "An error occurred during signin";
       setError(msg);
       show(msg, { variant: "error" });
     } finally {
@@ -39,64 +42,96 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-red-900">
       <Header />
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-md mx-auto">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-            <h1 className="text-2xl font-bold text-center mb-6 text-gray-900 dark:text-white">Sign In</h1>
+      <main className="flex-grow flex items-center justify-center px-4 py-8">
+        <div className="w-full max-w-md bg-gray-900 text-white rounded-2xl shadow-lg p-8">
+          {/* Title */}
+          <h1 className="text-3xl font-bold text-center text-red-500 mb-2">
+             Welcome back
+          </h1>
+          <h2 className="text-center text-gray-400 mb-6">
+            Sign in to your account
+          </h2>
 
-            {error && <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">{error}</div>}
+          {/* Error */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              {error}
+            </div>
+          )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Email
-                </label>
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Email */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-3 py-2 border border-gray-700 bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            {/* Password with toggle */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-300 mb-1"
+              >
+                Password
+              </label>
+              <div className="relative">
                 <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Password
-                </label>
-                <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  className="w-full px-3 py-2 pr-10 border border-gray-700 bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Enter your password"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-200"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
               </div>
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? "Signing In..." : "Sign In"}
-              </button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-gray-600 dark:text-gray-400">
-                Don't have an account?{" "}
-                <Link href="/signup" className="text-blue-600 hover:text-blue-500">
-                  Sign Up
-                </Link>
-              </p>
             </div>
+
+            {/* Submit button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? "Signing In..." : "Sign In"}
+            </button>
+          </form>
+
+          {/* Signup link */}
+          <div className="mt-6 text-center">
+            <p className="text-gray-400">
+              Don’t have an account?{" "}
+              <Link
+                href="/signup"
+                className="text-red-400 hover:text-red-300 font-medium"
+              >
+                Sign Up
+              </Link>
+            </p>
           </div>
         </div>
       </main>
