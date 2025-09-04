@@ -19,7 +19,6 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "New password must be at least 6 characters long" }, { status: 400 });
     }
 
-    // Get user with current password hash
     const dbUser = await prisma.user.findUnique({
       where: { id: user.userId },
     });
@@ -28,13 +27,11 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Verify current password
     const isValidPassword = await comparePassword(currentPassword, dbUser.passwordHash);
     if (!isValidPassword) {
       return NextResponse.json({ error: "Current password is incorrect" }, { status: 400 });
     }
 
-    // Hash new password and update user
     const newPasswordHash = await hashPassword(newPassword);
     await prisma.user.update({
       where: { id: user.userId },
