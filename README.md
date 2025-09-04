@@ -25,7 +25,7 @@ A movie streaming platform built with Next.js, tailwindcss v4, TypeScript, and P
 - ✅ Movie listing with pagination
 - ✅ Search movies by keyword
 - ✅ Filter movies by genre
-- ✅ Movie details page with trailer playback
+- ✅ Movie details page
 
 ### Authenticated Features
 
@@ -40,7 +40,6 @@ A movie streaming platform built with Next.js, tailwindcss v4, TypeScript, and P
 - ✅ TypeScript for type safety
 - ✅ PostgreSQL database with Prisma ORM
 - ✅ TMDB API integration for movie data
-- ✅ Video.js for trailer playback
 - ✅ Tailwind CSS v4 for styling
 - ✅ Responsive design
 - ✅ Proper HTTP status codes
@@ -53,7 +52,6 @@ A movie streaming platform built with Next.js, tailwindcss v4, TypeScript, and P
 - **Database**: PostgreSQL with Prisma ORM
 - **Authentication**: JWT with bcryptjs
 - **Styling**: Tailwind CSS v4
-- **Video Player**: Video.js
 - **HTTP Client**: Axios
 - **Movie Data**: TMDB API
 
@@ -188,7 +186,7 @@ The application uses the following database models:
 - Browse popular movies with pagination
 - Search movies by title
 - Filter by genre using sidebar
-- View movie details with trailers
+- View movie details
 
 ### User Interactions
 
@@ -196,12 +194,6 @@ The application uses the following database models:
 - Add/remove movies to watch later
 - Rate movies with 1-5 stars
 - View personal lists
-
-### Video Playback
-
-- YouTube trailer integration using Video.js
-- Responsive video player
-- Custom video player styling
 
 ### Authentication
 
