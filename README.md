@@ -112,7 +112,7 @@ npm run db:push
 npm generate:secret
 ```
 
-### 6. Run the development server
+### 7. Run the development server
 
 ```bash
 npm run dev
