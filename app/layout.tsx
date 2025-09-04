@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ToastProvider from "@/components/ToastProvider";
+import Footer from "@/components/Footer";
+
 
 export const metadata: Metadata = {
   title: "Movie Streaming Platform",
@@ -12,7 +14,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <ToastProvider>
-          <div className="min-h-screen bg-background text-foreground">{children}</div>
+          <div className="min-h-screen bg-background text-foreground"><main className="flex-1">{children}</main>
+            <Footer /></div>
         </ToastProvider>
       </body>
     </html>
