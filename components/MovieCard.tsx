@@ -103,13 +103,13 @@ function MovieCard({ movie, isFavorite = false, isWatchLater = false, userRating
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="bg-white p-2 dark:bg-red-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <Link href={`/movie/${movie.id}`}>
         <div className="relative">
           <img
             src={poster}
             alt={movie.title}
-            className="w-full h-64 object-cover"
+            className="w-full h-64 object-cover rounded-md"
             onError={(e) => {
               e.currentTarget.src = "/placeholder-poster.jpg";
             }}
@@ -122,7 +122,7 @@ function MovieCard({ movie, isFavorite = false, isWatchLater = false, userRating
 
       <div className="p-4">
         <Link href={`/movie/${movie.id}`}>
-          <h3 className="text-lg font-semibold mb-2 hover:text-blue-600 dark:hover:text-blue-400">{movie.title}</h3>
+          <h3 className="text-lg font-semibold mb-2 hover:text-orange-600 dark:hover:text-orange-300">{movie.title}</h3>
         </Link>
 
         <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">{movie.overview}</p>
@@ -155,7 +155,7 @@ function MovieCard({ movie, isFavorite = false, isWatchLater = false, userRating
             className={`flex-1 px-3 py-2 rounded text-sm font-medium transition-colors ${
               favorite
                 ? "bg-red-600 text-white hover:bg-red-700"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-transparent border border-yellow dark:text-gray-300 dark:hover:bg-red-600"
             }`}
           >
             {favorite ? "❤️ Favorited" : "🤍 Favorite"}
@@ -167,7 +167,7 @@ function MovieCard({ movie, isFavorite = false, isWatchLater = false, userRating
             className={`flex-1 px-3 py-2 rounded text-sm font-medium transition-colors ${
               watchLater
                 ? "bg-blue-600 text-white hover:bg-blue-700"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-transparent border border-white dark:text-gray-300 dark:hover:bg-red-600"
             }`}
           >
             {watchLater ? "📺 Watch Later" : "⏰ Watch Later"}

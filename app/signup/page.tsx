@@ -46,8 +46,7 @@ export default function SignUpPage() {
     }
 
     if (!validatePassword(password)) {
-      const msg =
-        "Password must include uppercase, lowercase, and a number or special character";
+      const msg = "Password must include uppercase, lowercase, and a number or special character";
       setError(msg);
       show(msg, { variant: "error" });
       return;
@@ -65,8 +64,7 @@ export default function SignUpPage() {
         router.push("/");
       }
     } catch (error: any) {
-      const msg =
-        error.response?.data?.error || "An error occurred during signup";
+      const msg = error.response?.data?.error || "An error occurred during signup";
       setError(msg);
       show(msg, { variant: "error" });
     } finally {
@@ -75,31 +73,22 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-red-900">
+    <div className="min-h-screen flex flex-col bg-gray-50 bg-gradient-to-bl from-red-950 to-black">
       <Header />
 
       <main className="flex-grow flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-md bg-gray-900 text-white rounded-2xl shadow-lg p-8">
+        <div className="w-full max-w-md bg-black border border-red-500 text-white rounded-2xl shadow-lg p-8">
           {/* Title */}
-          <h1 className="text-3xl font-bold text-center text-red-500 mb-2">
-           Create your account
-          </h1>
+          <h1 className="text-3xl font-bold text-center text-red-500 mb-2">Create your account</h1>
 
           {/* Error */}
-          {error && (
-            <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-              {error}
-            </div>
-          )}
+          {error && <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">{error}</div>}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-300 mb-1"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
                 Email
               </label>
               <input
@@ -108,17 +97,14 @@ export default function SignUpPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-700 bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full px-3 py-2 border border-red-700 bg-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="Enter your email"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-300 mb-1"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
                 Password
               </label>
               <div className="relative">
@@ -128,7 +114,7 @@ export default function SignUpPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-3 py-2 pr-10 border border-gray-700 bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-3 py-2 pr-10 border border-red-700 bg-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Enter your password"
                 />
                 <button
@@ -143,10 +129,7 @@ export default function SignUpPage() {
 
             {/* Confirm Password */}
             <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-300 mb-1"
-              >
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-1">
                 Confirm Password
               </label>
               <div className="relative">
@@ -156,7 +139,7 @@ export default function SignUpPage() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
-                  className="w-full px-3 py-2 pr-10 border border-gray-700 bg-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="w-full px-3 py-2 pr-10 border border-red-700 bg-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   placeholder="Confirm your password"
                 />
                 <button
@@ -183,10 +166,7 @@ export default function SignUpPage() {
           <div className="mt-6 text-center">
             <p className="text-gray-400">
               Already have an account?{" "}
-              <Link
-                href="/signin"
-                className="text-red-400 hover:text-red-300 font-medium"
-              >
+              <Link href="/signin" className="text-red-400 hover:text-red-300 font-medium">
                 Sign In
               </Link>
             </p>
