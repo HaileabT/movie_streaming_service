@@ -70,8 +70,8 @@ export default function HomePage() {
 
     checkAuth()
       .then(() => {
-        fetchWatchLater(setWatchLater, setIsLoading, setError, show);
-        fetchFavorites(setFavorites, setIsLoading, setError, show);
+        fetchWatchLater(setWatchLater, setIsLoading, setError, show).catch(() => {});
+        fetchFavorites(setFavorites, setIsLoading, setError, show).catch(() => {});
       })
       .catch(() => {});
     fetchGenres();
@@ -187,9 +187,7 @@ export default function HomePage() {
               <div className="mb-6">
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-600 dark:text-gray-400">Active filters:</span>
-                  {searchQuery && (
-                    <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Search: "{searchQuery}"</span>
-                  )}
+                  {searchQuery && <span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">Search: "{searchQuery}"</span>}
                   {selectedGenre && (
                     <span className="bg-green-100 text-orange-800 px-2 py-1 rounded text-sm">
                       Genre: {genres.find((g) => g.id === selectedGenre)?.name}
