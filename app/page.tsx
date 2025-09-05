@@ -70,8 +70,8 @@ export default function HomePage() {
 
     checkAuth()
       .then(() => {
-        fetchWatchLater(setWatchLater, setIsLoading, setError, show).catch(() => {});
-        fetchFavorites(setFavorites, setIsLoading, setError, show).catch(() => {});
+        fetchWatchLater(setWatchLater, setIsLoading, show).catch(() => {});
+        fetchFavorites(setFavorites, setIsLoading, show).catch(() => {});
       })
       .catch(() => {});
     fetchGenres();
